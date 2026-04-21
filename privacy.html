@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — Time Cop</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #07070F; color: #ccc; line-height: 1.8; }
+  header { background: #07070F; border-bottom: 1px solid #1E1E2E; padding: 20px 0; text-align: center; }
+  .logo { font-size: 22px; font-weight: 900; color: #fff; letter-spacing: 6px; }
+  .logo span { color: #F5C542; }
+  .tagline { font-size: 11px; color: #F5C542; letter-spacing: 3px; margin-top: 4px; }
+  .container { max-width: 800px; margin: 0 auto; padding: 48px 24px; }
+  h1 { font-size: 28px; font-weight: 800; color: #fff; margin-bottom: 8px; }
+  .date { font-size: 12px; color: #666; margin-bottom: 40px; }
+  h2 { font-size: 16px; font-weight: 700; color: #F5C542; margin: 32px 0 12px; }
+  p { font-size: 14px; color: #aaa; margin-bottom: 12px; }
+  ul { padding-left: 20px; margin-bottom: 12px; }
+  li { font-size: 14px; color: #aaa; margin-bottom: 6px; }
+  .highlight { background: #11111C; border-left: 3px solid #F5C542; padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 20px 0; }
+  .highlight p { color: #ccc; margin: 0; }
+  footer { text-align: center; padding: 40px 24px; border-top: 1px solid #1E1E2E; color: #444; font-size: 12px; }
+  a { color: #F5C542; text-decoration: none; }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">TIME<span>COP</span></div>
+  <div class="tagline">TIME & ORDER</div>
+</header>
+<div class="container">
+  <h1>Privacy Policy</h1>
+  <p class="date">Effective date: 1 April 2026 · Last updated: 21 April 2026</p>
+
+  <div class="highlight">
+    <p>Time Cop is an attendance management platform for institutions of all kinds — schools, hospitals, corporations, NGOs, religious organisations and any other body that needs to track and manage attendance. We take the privacy of all users seriously. This policy explains what data we collect, how we use it, and how we protect it.</p>
+  </div>
+
+  <h2>1. Who We Are</h2>
+  <p>Time Cop is a registered trademark operated in Nigeria. Our platform is accessible at <a href="https://timecop.com.ng">timecop.com.ng</a>. For privacy enquiries, contact us at <a href="mailto:hello@timecop.com.ng">hello@timecop.com.ng</a>.</p>
+
+  <h2>2. Who Uses Time Cop</h2>
+  <p>Time Cop serves any institution that needs to manage attendance, including but not limited to:</p>
+  <ul>
+    <li>Schools and educational institutions (staff and student attendance)</li>
+    <li>Hospitals and healthcare facilities (staff attendance)</li>
+    <li>Corporate organisations and businesses (employee attendance)</li>
+    <li>Religious organisations and places of worship</li>
+    <li>NGOs, government agencies and other bodies</li>
+  </ul>
+  <p>Throughout this policy, the term "institution" refers to any organisation using Time Cop, and "members" refers to staff, students, employees or any individuals whose attendance is being tracked.</p>
+
+  <h2>3. Data We Collect</h2>
+  <p>We collect only the data necessary to operate the attendance management platform:</p>
+  <ul>
+    <li><strong>Staff and employee data:</strong> Full name, phone number, email address, staff ID, job title, department and attendance records (clock-in and clock-out times)</li>
+    <li><strong>Student and member data:</strong> Full name, class or group, date of birth and daily arrival records</li>
+    <li><strong>Guardian and parent data:</strong> Full name, phone number, email address and relationship to the member</li>
+    <li><strong>Location data:</strong> GPS coordinates at the time of clock-in, only when geofence verification is enabled by the institution administrator. Location data is used solely to verify proximity to the designated entry point and is not stored beyond the clock-in event.</li>
+    <li><strong>Device data:</strong> We do not collect device identifiers, advertising IDs or any other device-level data.</li>
+  </ul>
+
+  <h2>4. How We Use Your Data</h2>
+  <ul>
+    <li>To record and track attendance for the institution</li>
+    <li>To notify guardians or designated contacts when a member arrives</li>
+    <li>To generate attendance reports for institution administrators</li>
+    <li>To send account setup and onboarding communications</li>
+    <li>To provide AI-powered attendance insights and analysis to administrators</li>
+    <li>To improve the platform based on usage patterns (anonymised)</li>
+  </ul>
+  <p>We do not sell, rent or share your personal data with third parties for marketing purposes under any circumstances.</p>
+
+  <h2>5. Biometric Data</h2>
+  <p>The Time Cop mobile app uses your device's built-in biometric authentication (fingerprint or face ID) to verify your identity before clocking in. Time Cop does not store, transmit or process your biometric data. Biometric verification is handled entirely by your device's operating system and the data never leaves your phone.</p>
+
+  <h2>6. Data Storage and Security</h2>
+  <ul>
+    <li>All data is stored on secure cloud servers with PostgreSQL encryption at rest</li>
+    <li>All data transmission is encrypted using HTTPS/TLS</li>
+    <li>PINs are hashed using bcrypt — we cannot recover your PIN under any circumstance</li>
+    <li>API access is protected by JWT tokens that expire every 8 hours</li>
+    <li>Access is restricted by role — members can only see their own records; administrators can only see their institution's data</li>
+    <li>Rate limiting and brute-force protection are active on all login endpoints</li>
+  </ul>
+
+  <h2>7. Data Retention</h2>
+  <p>Attendance records are retained for the duration of the institution's subscription and for 12 months after subscription ends, after which they are permanently deleted. Staff and member accounts are deleted within 30 days of a deletion request from the institution administrator.</p>
+
+  <h2>8. Your Rights</h2>
+  <p>You have the right to:</p>
+  <ul>
+    <li>Request access to the personal data we hold about you</li>
+    <li>Request correction of inaccurate data</li>
+    <li>Request deletion of your data (subject to institutional requirements)</li>
+    <li>Object to processing of your data</li>
+  </ul>
+  <p>To exercise these rights, contact your institution administrator or email us at <a href="mailto:hello@timecop.com.ng">hello@timecop.com.ng</a>.</p>
+
+  <h2>9. Children's Privacy</h2>
+  <p>Where student data is collected, it is done only with the consent of the institution and the parent or guardian. We do not knowingly collect data directly from children under the age of 13. Student records are accessible only to authorised institution administrators and the student's registered parent or guardian.</p>
+
+  <h2>10. Third-Party Services</h2>
+  <p>We use the following third-party services to operate the platform:</p>
+  <ul>
+    <li><strong>Railway</strong> — cloud hosting and database (railway.app)</li>
+    <li><strong>Brevo</strong> — transactional email delivery (brevo.com)</li>
+    <li><strong>Africa's Talking</strong> — SMS delivery (africastalking.com)</li>
+  </ul>
+  <p>Each of these services has their own privacy policy and data processing agreements in place.</p>
+
+  <h2>11. Changes to This Policy</h2>
+  <p>We may update this policy from time to time. We will notify institution administrators of significant changes via email. Continued use of the platform after changes are posted constitutes acceptance of the updated policy.</p>
+
+  <h2>12. Contact Us</h2>
+  <p>For any privacy concerns or data requests:</p>
+  <ul>
+    <li>Email: <a href="mailto:hello@timecop.com.ng">hello@timecop.com.ng</a></li>
+    <li>Website: <a href="https://timecop.com.ng">timecop.com.ng</a></li>
+  </ul>
+</div>
+<footer>
+  &copy; 2026 Time Cop &nbsp;·&nbsp; Time &amp; Order &nbsp;·&nbsp; <a href="https://timecop.com.ng">timecop.com.ng</a>
+</footer>
+</body>
+</html>
