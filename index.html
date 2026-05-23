@@ -242,18 +242,95 @@
   const form = document.getElementById('registerForm');
   const btn = document.getElementById('submitBtn');
   const successMsg = document.getElementById('successMsg');
+
+  function initPaystack(registrationData, token) {
+    const amounts = {
+      'Monthly — ₦15,000/month': 1500000,
+      'Per term — ₦35,000/term': 3500000
+    };
+    const amount = amounts[registrationData.plan] || 1500000;
+
+    const handler = PaystackPop.setup({
+      key: 'pk_test_854be429c7c6c4c0bc6997673132210d3ad172e8',
+      email: registrationData.email,
+      amount: amount,
+      currency: 'NGN',
+      ref: 'TC-NEW-' + Date.now(),
+      metadata: { token, institution_name: registrationData.institution_name },
+      callback: function(response) {
+        // Complete onboarding after payment
+        btn.textContent = 'Setting up your account...';
+        fetch('https://api.timecop.com.ng/api/v1/onboard/complete', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ token, paystack_reference: response.reference })
+        })
+        .then(r => r.json())
+        .then(result => {
+          if (result.success) {
+            form.style.display = 'none';
+            successMsg.innerHTML = `
+              <div style="text-align:center">
+                <div style="font-size:48px;margin-bottom:16px">🎉</div>
+                <h3 style="color:#F5C542;font-size:22px;margin-bottom:8px">Your account is live!</h3>
+                <p style="color:#ccc;margin-bottom:16px">Institution code: <strong style="color:#F5C542;font-size:24px;letter-spacing:6px">${result.data.institution_code}</strong></p>
+                <p style="color:#888;font-size:13px">Check your email for your login credentials and setup instructions.</p>
+              </div>
+            `;
+            successMsg.style.display = 'block';
+          } else {
+            alert('Payment received but setup failed. Contact hello@timecop.com.ng with reference: ' + response.reference);
+            btn.disabled = false;
+            btn.textContent = 'Register my institution →';
+          }
+        })
+        .catch(() => {
+          alert('Payment received but setup failed. Contact hello@timecop.com.ng with reference: ' + response.reference);
+        });
+      },
+      onClose: function() {
+        btn.disabled = false;
+        btn.textContent = 'Register my institution →';
+      }
+    });
+    handler.openIframe();
+  }
+
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    btn.disabled = true; btn.textContent = 'Sending...';
+    btn.disabled = true; btn.textContent = 'Processing...';
     const data = Object.fromEntries(new FormData(form));
     try {
+      // Save registration first
       const res = await fetch('https://api.timecop.com.ng/api/v1/institutions/register', {
         method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data)
       });
       const result = await res.json();
-      if (result.success || res.ok) { form.style.display = 'none'; successMsg.style.display = 'block'; }
-      else { btn.disabled = false; btn.textContent = 'Register my institution →'; alert('Something went wrong. Please try again or contact hello@timecop.com.ng'); }
-    } catch(e) { form.style.display = 'none'; successMsg.style.display = 'block'; }
+      if (result.success || res.ok) {
+        // Get payment token and open Paystack
+        if (result.data && result.data.payment_token) {
+          if (typeof PaystackPop !== 'undefined') {
+            initPaystack(data, result.data.payment_token);
+          } else {
+            const script = document.createElement('script');
+            script.src = 'https://js.paystack.co/v1/inline.js';
+            script.onload = () => initPaystack(data, result.data.payment_token);
+            document.head.appendChild(script);
+          }
+        } else {
+          form.style.display = 'none';
+          successMsg.style.display = 'block';
+        }
+      } else {
+        btn.disabled = false;
+        btn.textContent = 'Register my institution →';
+        alert('Something went wrong. Please try again or contact hello@timecop.com.ng');
+      }
+    } catch(e) {
+      btn.disabled = false;
+      btn.textContent = 'Register my institution →';
+      alert('Something went wrong. Please try again.');
+    }
   });
 </script>
 </body>
